@@ -12,6 +12,8 @@ public class Delivery {
     private int id;
     private LocalDate deliveryDate;
     private List<Component> components;
+    
+    public Delivery() {}
 
     public Delivery(LocalDate deliveryDate, List<Component> components) {
         this.deliveryDate = deliveryDate;

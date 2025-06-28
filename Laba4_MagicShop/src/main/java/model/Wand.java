@@ -11,6 +11,8 @@ public class Wand {
     private int coreId;
     private boolean isSold; // false если не продана
     private double price;
+    
+    public Wand() {}
 
     public Wand(int id, int woodId, int coreId, boolean isSold, double price) {
         this.id = id;
