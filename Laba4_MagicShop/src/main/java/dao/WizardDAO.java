@@ -8,7 +8,6 @@ import java.util.List;
 public class WizardDAO {
     private final Connection connection;
 
-    // Инициализация с подключением к БД
     public WizardDAO(Connection connection) {
         this.connection = connection;
     }
@@ -19,8 +18,7 @@ public class WizardDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, wizard.getName());
             stmt.executeUpdate();
-            
-            // Получаем автоматически сгенерированный ID
+
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     wizard.setId(rs.getInt(1));
@@ -64,7 +62,7 @@ public class WizardDAO {
         return wizards;
     }
 
-    public void update(Wizard wizard) throws SQLException {
+    public void updateWizard(Wizard wizard) throws SQLException {
         String sql = "UPDATE wizards SET name = ? WHERE id = ?";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -74,7 +72,7 @@ public class WizardDAO {
         }
     }
 
-    public void delete(int id) throws SQLException {
+    public void deleteWizard(int id) throws SQLException {
         String sql = "DELETE FROM wizards WHERE id = ?";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {

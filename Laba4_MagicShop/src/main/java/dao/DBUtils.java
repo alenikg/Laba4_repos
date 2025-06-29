@@ -33,31 +33,31 @@ public class DBUtils {
 
             "CREATE TABLE IF NOT EXISTS woods (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "type TEXT NOT NULL UNIQUE)",  
+            "type TEXT NOT NULL UNIQUE)",
             
             "CREATE TABLE IF NOT EXISTS cores (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "type TEXT NOT NULL UNIQUE)",
-            
+
             "CREATE TABLE IF NOT EXISTS wizards (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "name TEXT NOT NULL)",
 
             "CREATE TABLE IF NOT EXISTS deliveries (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "delivery_date TEXT NOT NULL)", 
-            
+            "delivery_date TEXT NOT NULL)",
+
             "CREATE TABLE IF NOT EXISTS delivery_components (" +
             "delivery_id INTEGER NOT NULL, " +
             "component_id INTEGER NOT NULL, " +
-            "component_type TEXT NOT NULL CHECK(component_type IN ('wood', 'core')), " +
+            "component_type TEXT NOT NULL CHECK(component_type IN ('wood', 'core')))",
 
             "CREATE TABLE IF NOT EXISTS wands (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "wood_id INTEGER NOT NULL, " +
             "core_id INTEGER NOT NULL, " +
             "is_sold BOOLEAN NOT NULL DEFAULT FALSE, " +
-            "price REAL NOT NULL CHECK(price > 0), " +  
+            "price REAL NOT NULL CHECK(price > 0), " +
             "FOREIGN KEY (wood_id) REFERENCES woods(id), " +
             "FOREIGN KEY (core_id) REFERENCES cores(id))"
         };
@@ -86,6 +86,24 @@ public class DBUtils {
             }
         } catch (SQLException e) {
             System.err.println("Ошибка подключения к базе данных:");
+            e.printStackTrace();
+        }
+    }
+
+    public static void resetDatabase() {
+        try (Statement statement = getConnection().createStatement()) {
+            statement.execute("DROP TABLE IF EXISTS wizards");
+            statement.execute("DROP TABLE IF EXISTS deliveries");
+            statement.execute("DROP TABLE IF EXISTS delivery_components");
+            statement.execute("DROP TABLE IF EXISTS wands");
+            statement.execute("DROP TABLE IF EXISTS woods");
+            statement.execute("DROP TABLE IF EXISTS cores");
+
+            initializeDatabase();
+            System.out.println("Database reset successfully!");
+
+        } catch (SQLException e) {
+            System.err.println("Error resetting database: " + e.getMessage());
             e.printStackTrace();
         }
     }

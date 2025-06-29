@@ -91,7 +91,7 @@ public class WandDAOImpl implements WandDAO {
                     rs.getInt("id"),
                     rs.getInt("wood_id"),
                     rs.getInt("core_id"),
-                    false, // Мы знаем, что is_sold = false
+                    false,
                     rs.getDouble("price")
                 ));
             }

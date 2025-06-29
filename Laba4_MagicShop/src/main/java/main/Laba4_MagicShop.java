@@ -1,8 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 
 package main;
+
+import javax.swing.SwingUtilities;
+
+import dao.DBUtils;
+import view.MainFrame;
 
 /**
  *
@@ -11,6 +13,11 @@ package main;
 public class Laba4_MagicShop {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        DBUtils.initializeDatabase();
+        SwingUtilities.invokeLater(() -> {
+            MainFrame frame = new MainFrame();
+            frame.setVisible(true);
+        });
     }
 }
+

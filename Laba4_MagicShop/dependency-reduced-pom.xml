@@ -24,12 +24,15 @@
             </configuration>
           </execution>
         </executions>
+        <configuration>
+          <mainClass>main.Laba4_MagicShop</mainClass>
+        </configuration>
       </plugin>
     </plugins>
   </build>
   <properties>
     <maven.compiler.target>22</maven.compiler.target>
-    <exec.mainClass>com.mycompany.laba4_magicshop.Laba4_MagicShop</exec.mainClass>
+    <exec.mainClass>cmain.Laba4_MagicShop</exec.mainClass>
     <maven.compiler.source>22</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
